@@ -1,0 +1,18 @@
+{
+  "income_certificate": {
+    "name": "Income Certificate",
+    "steps": [
+      "Check eligibility",
+      "Collect required documents",
+      "Submit application",
+      "Document verification",
+      "Certificate approval"
+    ],
+    "documents": [
+      "Identity proof",
+      "Address proof",
+      "Income proof"
+    ],
+    "next_action": "Collect the missing documents and submit the application"
+  }
+}
