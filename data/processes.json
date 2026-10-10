@@ -14,5 +14,21 @@
       "Income proof"
     ],
     "next_action": "Collect the missing documents and submit the application"
+  },
+  "birth_certificate": {
+    "name": "Birth Certificate",
+    "steps": [
+      "Check birth registration status",
+      "Identify the relevant local registration office",
+      "Check the applicable document requirements",
+      "Submit the application",
+      "Wait for verification and processing"
+    ],
+    "documents": [
+      "Proof of birth",
+      "Parent or guardian identity proof",
+      "Address proof"
+    ],
+    "next_action": "Check the local authority's official requirements and gather the applicable documents"
   }
 }
