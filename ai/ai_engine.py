@@ -1,24 +1,42 @@
 def understand_service(user_input):
     text = user_input.lower().strip()
 
-    income_keywords = [
-        "income",
-        "salary proof",
-        "family earnings",
-        "proof of income"
-    ]
+    service_keywords = {
+        "income_certificate": [
+            "income certificate",
+            "income proof",
+            "salary proof",
+            "family income",
+            "family earnings"
+        ],
+        "birth_certificate": [
+            "birth certificate",
+            "birth registration",
+            "newborn",
+            "date of birth",
+            "register my baby"
+        ],
+        "scholarship": [
+            "scholarship",
+            "student financial aid",
+            "education funding",
+            "student assistance"
+        ],
+        "caste_certificate": [
+            "caste certificate",
+            "caste proof",
+            "community certificate"
+        ],
+        "ration_card": [
+            "ration card",
+            "food ration",
+            "public distribution card",
+            "add family member to ration card"
+        ]
+    }
 
-    birth_keywords = [
-        "birth",
-        "born",
-        "newborn",
-        "date of birth"
-    ]
-
-    if any(keyword in text for keyword in income_keywords):
-        return "income_certificate"
-
-    if any(keyword in text for keyword in birth_keywords):
-        return "birth_certificate"
+    for service_id, keywords in service_keywords.items():
+        if any(keyword in text for keyword in keywords):
+            return service_id
 
     return None

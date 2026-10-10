@@ -30,5 +30,55 @@
       "Address proof"
     ],
     "next_action": "Check the local authority's official requirements and gather the applicable documents"
+  },
+  "scholarship": {
+    "name": "Scholarship Schemes",
+    "steps": [
+      "Identify a suitable scholarship scheme",
+      "Check eligibility criteria",
+      "Review required documents",
+      "Submit the application through the official portal",
+      "Track application status"
+    ],
+    "documents": [
+      "Identity proof",
+      "Education records",
+      "Income proof",
+      "Bank account details"
+    ],
+    "next_action": "Identify the scholarship scheme and verify its eligibility and document requirements on the official portal"
+  },
+  "caste_certificate": {
+    "name": "Caste Certificate",
+    "steps": [
+      "Check the applicable state or local authority process",
+      "Review eligibility and required evidence",
+      "Gather the applicable documents",
+      "Submit the application to the designated authority",
+      "Track verification and application status"
+    ],
+    "documents": [
+      "Identity proof",
+      "Address proof",
+      "Caste-related supporting evidence"
+    ],
+    "next_action": "Check the relevant state's official requirements before preparing your application"
+  },
+  "ration_card": {
+    "name": "Ration Card",
+    "steps": [
+      "Identify whether you need a new card or an update",
+      "Check the applicable state's eligibility criteria",
+      "Review required household documents",
+      "Submit the application through the authorized channel",
+      "Track the application status"
+    ],
+    "documents": [
+      "Identity proof",
+      "Address proof",
+      "Household member details",
+      "Income or eligibility evidence, if applicable"
+    ],
+    "next_action": "Select your state and check the official ration card application requirements"
   }
 }

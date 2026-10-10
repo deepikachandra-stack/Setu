@@ -14,3 +14,12 @@ user_has = [
 missing = check_documents(required, user_has)
 
 print(missing)
+
+from ai.requirement_checker import check_documents
+
+missing = check_documents(
+    ["Identity proof", "Address proof"],
+    ["Aadhaar card"]
+)
+
+print("Missing documents:", missing)
