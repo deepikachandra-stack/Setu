@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SETU | Your Government Process</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">SETU<span>.</span></a>
+        <a href="index.html">← Back to Home</a>
+    </header>
+
+    <main class="about-section">
+        <h1 id="serviceTitle">Your Government Process</h1>
+        <p id="serviceMessage"></p>
+        <p>Check your state government's official website for current
+        requirements, documents, fees and application procedures.</p>
+        <br>
+        <a href="index.html">← Search another service</a>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const service = params.get("service") || "Government Service";
+
+        document.getElementById("serviceTitle").textContent =
+            service + " Process";
+
+        document.getElementById("serviceMessage").textContent =
+            "You are exploring the process for: " + service + ".";
+    </script>
+</body>
+</html>
