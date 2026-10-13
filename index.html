@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setu | Government Services Made Simple</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#home" aria-label="Setu home">SE<span>TU</span><b>.</b></a>
+    <nav aria-label="Main navigation">
+      <a class="active" href="#home">Home</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="ai-pill"><span>✦</span> AI Powered</div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wave wave-left" aria-hidden="true">
+        <span class="wave-orange"></span><span class="wave-green"></span>
+      </div>
+      <div class="wave wave-right" aria-hidden="true">
+        <span class="wave-orange"></span><span class="wave-green"></span>
+      </div>
+
+      <div class="monument" aria-hidden="true">
+        <div class="flag"></div>
+        <div class="dome"></div>
+        <div class="roof"></div>
+        <div class="columns"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="base"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="badge"><span class="flag-emoji">🇮🇳</span> Simplifying Government Services</div>
+        <h1>Government services,<br><span>made simple.</span></h1>
+        <p class="hero-copy">Tell Setu what you want to accomplish. We'll turn complicated government<br class="desktop-break"> procedures into a clear step-by-step journey.</p>
+
+        <form class="search-box" id="serviceForm">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="serviceInput" type="text" placeholder="What do you need help with?" aria-label="Government service you need" autocomplete="off">
+          <button type="submit">Find My Process <span aria-hidden="true">→</span></button>
+        </form>
+
+        <div class="examples">
+          <span class="try-label">Try:</span>
+          <button type="button" data-service="Income Certificate">Income Certificate</button>
+          <button type="button" data-service="Birth Certificate">Birth Certificate</button>
+          <button type="button" data-service="Caste Certificate">Caste Certificate</button>
+        </div>
+        <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="how-section" id="how-it-works">
+      <div class="section-heading">
+        <h2>Government processes shouldn't be confusing.</h2>
+        <p>Setu turns complicated procedures into simple actions.</p>
+      </div>
+
+      <div class="steps">
+        <article class="step-card">
+          <div class="step-top"><span class="step-number">01</span><span class="step-icon" aria-hidden="true">◎</span></div>
+          <h3>Tell us your goal</h3>
+          <p>Describe the government service you want in simple words.</p>
+        </article>
+        <span class="step-arrow" aria-hidden="true">→</span>
+        <article class="step-card">
+          <div class="step-top"><span class="step-number">02</span><span class="step-icon" aria-hidden="true">✳</span></div>
+          <h3>Setu understands</h3>
+          <p>Our AI understands the government process and its requirements.</p>
+        </article>
+        <span class="step-arrow" aria-hidden="true">→</span>
+        <article class="step-card">
+          <div class="step-top"><span class="step-number">03</span><span class="step-icon" aria-hidden="true">♧</span></div>
+          <h3>Follow your path</h3>
+          <p>Get a clear step-by-step path with the next action you need.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-strip" id="about">
+      <div class="about-mark">SETU<span>.</span></div>
+      <p>Bridging citizens and government services.</p>
+      <small>© 2026 Setu. Built to make public services easier.</small>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

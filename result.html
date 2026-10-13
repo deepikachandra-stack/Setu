@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SETU | Your Government Process</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">SETU<span>.</span></a>
+        <a href="index.html">← Back to Home</a>
+    </header>
+
+    <main class="about-section">
+        <h1 id="serviceTitle">Loading your government process...</h1>
+        <p id="serviceMessage" role="status">Please wait...</p>
+
+        <section id="processDetails" hidden>
+            <h2>Required Documents</h2>
+            <p>Select the documents you already have:</p>
+            <ul id="documentsList"></ul>
+            <button id="checkDocumentsButton" type="button">
+    Check Missing Documents
+</button>
+
+<p id="documentCheckMessage" role="status"></p>
+
+            <h2>Application Steps</h2>
+            <ol id="stepsList"></ol>
+
+            <h2>Next Action</h2>
+            <p id="nextAction"></p>
+        </section>
+
+        <p id="errorMessage" role="alert"></p>
+
+        <p>
+            Check your state government's official website for current
+            requirements, documents, fees and application procedures.
+        </p>
+
+        <br>
+        <a href="index.html">← Search another service</a>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const service = params.get("service") || "";
+
+        const serviceTitle = document.getElementById("serviceTitle");
+        const serviceMessage = document.getElementById("serviceMessage");
+        const processDetails = document.getElementById("processDetails");
+        const documentsList = document.getElementById("documentsList");
+        const stepsList = document.getElementById("stepsList");
+        const nextAction = document.getElementById("nextAction");
+        const errorMessage = document.getElementById("errorMessage");
+
+        async function loadProcess() {
+            if (!service) {
+                serviceTitle.textContent = "No service selected";
+                serviceMessage.textContent = "Please return home and select a service.";
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    "http://127.0.0.1:5000/process?service=" +
+                    encodeURIComponent(service)
+                );
+
+                const data = await response.json();
+
+                if (!response.ok || data.error) {
+                    throw new Error(data.error || "Unable to load this service.");
+                }
+
+                serviceTitle.textContent = data.name + " Process";
+                serviceMessage.textContent =
+                    "Here is the process for " + data.name + ".";
+
+                data.documents.forEach((documentName) => {
+                    const item = document.createElement("li");
+                    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = documentName;
+    checkbox.className = "document-checkbox";
+
+    const label = document.createElement("label");
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(" " + documentName));
+
+    item.appendChild(label);
+                    
+                    documentsList.appendChild(item);
+                });
+
+                data.steps.forEach((step) => {
+                    const item = document.createElement("li");
+                    item.textContent = step;
+                    stepsList.appendChild(item);
+                });
+
+                nextAction.textContent = data.next_action;
+                processDetails.hidden = false;
+            } catch (error) {
+                serviceTitle.textContent = "Unable to load process";
+                serviceMessage.textContent =
+                    "Please check your connection to the Setu backend.";
+                errorMessage.textContent = error.message;
+                console.error("Process loading error:", error);
+            }
+        }
+document.getElementById("checkDocumentsButton").addEventListener("click", async () => {
+    const selectedDocuments = Array.from(
+        document.querySelectorAll(".document-checkbox:checked")
+    ).map((checkbox) => checkbox.value);
+
+    const message = document.getElementById("documentCheckMessage");
+    message.textContent = "Checking your documents...";
+
+    try {
+        const query = new URLSearchParams();
+        query.append("service", service);
+
+        selectedDocuments.forEach((documentName) => {
+            query.append("document", documentName);
+        });
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/check-documents?" + query.toString()
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || data.error) {
+            throw new Error(data.error || "Unable to check documents.");
+        }
+
+        if (data.missing_documents.length === 0) {
+            message.textContent = "You have all the required documents!";
+        } else {
+            message.textContent =
+                "Missing documents: " + data.missing_documents.join(", ");
+        }
+    } catch (error) {
+        message.textContent =
+            "Unable to check documents. Please make sure the backend is running.";
+        console.error("Document check error:", error);
+    }
+});
+        loadProcess();
+    </script>
+</body>
+</html>
+
