@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from ai.ai_engine import understand_service
 from ai.process_loader import get_process
 from ai.requirement_checker import check_documents
 
 
 app = Flask(__name__)
-
+CORS(app)
 @app.route("/")
 def home():
     return "Setu backend is running!"

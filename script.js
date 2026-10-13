@@ -14,17 +14,41 @@ document.querySelectorAll("[data-service]").forEach((button) => {
   });
 });
 
-serviceForm.addEventListener("submit", (event) => {
+serviceForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
   const service = serviceInput.value.trim();
 
   if (!service) {
-    formMessage.textContent = "Please enter the government service you need help with.";
+    formMessage.textContent =
+      "Please enter the government service you need help with.";
     serviceInput.focus();
     return;
   }
 
-  // Frontend demo only: this does not yet connect to an AI/backend.
-  const destination = "result.html?service=" + encodeURIComponent(service);
-  window.location.href = destination;
+  formMessage.textContent = "Finding your government service...";
+
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:5000/process?service=${encodeURIComponent(service)}`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || data.error) {
+      formMessage.textContent =
+        data.error || "Unable to find the service. Please try again.";
+      return;
+    }
+
+    sessionStorage.setItem("setuProcessData", JSON.stringify(data));
+    sessionStorage.setItem("setuService", service);
+
+    window.location.href =
+      "result.html?service=" + encodeURIComponent(service);
+  } catch (error) {
+    formMessage.textContent =
+      "Cannot connect to Setu. Please make sure the backend is running.";
+    console.error("Backend connection error:", error);
+  }
 });
