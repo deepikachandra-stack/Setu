@@ -231,22 +231,13 @@ Potential future improvements include:
 
 ---
 
-## 🤝 Contributing
 
-Contributions and suggestions are welcome!
 
-1. Fork the repository.
-2. Create a branch for your change.
-3. Make and test your changes.
-4. Submit a pull request describing your improvement.
+##  Our Team
 
-Please avoid committing passwords, API keys, access tokens, or other sensitive information.
-
----
-
-## 👥 Team
-
-**Project:** Setu — Government Services Made Simple
+- **Satwika** — Frontend Development 
+- **Tanvi Reddy** — Backend Development 
+- **Deepika Chandra** — AI Integration, Intelligent Service Processing & Project Coordination 
 
 **Repository:** [deepikachandra-stack/Setu](https://github.com/deepikachandra-stack/Setu)
 
@@ -254,10 +245,4 @@ Built as a project to make public-service guidance more understandable, accessib
 
 ---
 
-## 📄 License
 
-No license has been specified in this repository yet. Unless a license is added, others generally do not have permission to reuse, modify, or distribute the code beyond what applicable law permits.
-
----
-
-**Setu — Clearer steps. Better preparation. Simpler access to public services. 🇮🇳**
