@@ -1,4 +1,3 @@
-
 const serviceInput = document.getElementById("serviceInput");
 const serviceForm = document.getElementById("serviceForm");
 const formMessage = document.getElementById("formMessage");

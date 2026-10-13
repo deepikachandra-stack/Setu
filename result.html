@@ -21,11 +21,11 @@
             <h2>Required Documents</h2>
             <p>Select the documents you already have:</p>
             <ul id="documentsList"></ul>
-            <button id="checkDocumentsButton" type="button">
-    Check Missing Documents
-</button>
 
-<p id="documentCheckMessage" role="status"></p>
+            <button id="checkDocumentsButton" type="button">
+                Check Missing Documents
+            </button>
+            <p id="documentCheckMessage" role="status"></p>
 
             <h2>Application Steps</h2>
             <ol id="stepsList"></ol>
@@ -56,11 +56,14 @@
         const stepsList = document.getElementById("stepsList");
         const nextAction = document.getElementById("nextAction");
         const errorMessage = document.getElementById("errorMessage");
+        const checkButton = document.getElementById("checkDocumentsButton");
+        const documentCheckMessage = document.getElementById("documentCheckMessage");
 
         async function loadProcess() {
             if (!service) {
                 serviceTitle.textContent = "No service selected";
-                serviceMessage.textContent = "Please return home and select a service.";
+                serviceMessage.textContent =
+                    "Please return home and select a service.";
                 return;
             }
 
@@ -73,7 +76,9 @@
                 const data = await response.json();
 
                 if (!response.ok || data.error) {
-                    throw new Error(data.error || "Unable to load this service.");
+                    throw new Error(
+                        data.error || "Unable to load this service."
+                    );
                 }
 
                 serviceTitle.textContent = data.name + " Process";
@@ -83,16 +88,17 @@
                 data.documents.forEach((documentName) => {
                     const item = document.createElement("li");
                     const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.value = documentName;
-    checkbox.className = "document-checkbox";
+                    checkbox.type = "checkbox";
+                    checkbox.value = documentName;
+                    checkbox.className = "document-checkbox";
 
-    const label = document.createElement("label");
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(" " + documentName));
+                    const label = document.createElement("label");
+                    label.appendChild(checkbox);
+                    label.appendChild(
+                        document.createTextNode(" " + documentName)
+                    );
 
-    item.appendChild(label);
-                    
+                    item.appendChild(label);
                     documentsList.appendChild(item);
                 });
 
@@ -112,46 +118,55 @@
                 console.error("Process loading error:", error);
             }
         }
-document.getElementById("checkDocumentsButton").addEventListener("click", async () => {
-    const selectedDocuments = Array.from(
-        document.querySelectorAll(".document-checkbox:checked")
-    ).map((checkbox) => checkbox.value);
 
-    const message = document.getElementById("documentCheckMessage");
-    message.textContent = "Checking your documents...";
+        checkButton.addEventListener("click", async () => {
+            const selectedDocuments = Array.from(
+                document.querySelectorAll(".document-checkbox:checked")
+            ).map((checkbox) => checkbox.value);
 
-    try {
-        const query = new URLSearchParams();
-        query.append("service", service);
+            documentCheckMessage.textContent =
+                "Checking your documents...";
+            checkButton.disabled = true;
 
-        selectedDocuments.forEach((documentName) => {
-            query.append("document", documentName);
+            try {
+                const query = new URLSearchParams();
+                query.append("service", service);
+
+                selectedDocuments.forEach((documentName) => {
+                    query.append("document", documentName);
+                });
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/check-documents?" +
+                    query.toString()
+                );
+
+                const data = await response.json();
+
+                if (!response.ok || data.error) {
+                    throw new Error(
+                        data.error || "Unable to check documents."
+                    );
+                }
+
+                if (data.missing_documents.length === 0) {
+                    documentCheckMessage.textContent =
+                        "You have all the required documents!";
+                } else {
+                    documentCheckMessage.textContent =
+                        "Missing documents: " +
+                        data.missing_documents.join(", ");
+                }
+            } catch (error) {
+                documentCheckMessage.textContent =
+                    "Unable to check documents. Please make sure the backend is running.";
+                console.error("Document check error:", error);
+            } finally {
+                checkButton.disabled = false;
+            }
         });
 
-        const response = await fetch(
-            "http://127.0.0.1:5000/check-documents?" + query.toString()
-        );
-
-        const data = await response.json();
-
-        if (!response.ok || data.error) {
-            throw new Error(data.error || "Unable to check documents.");
-        }
-
-        if (data.missing_documents.length === 0) {
-            message.textContent = "You have all the required documents!";
-        } else {
-            message.textContent =
-                "Missing documents: " + data.missing_documents.join(", ");
-        }
-    } catch (error) {
-        message.textContent =
-            "Unable to check documents. Please make sure the backend is running.";
-        console.error("Document check error:", error);
-    }
-});
         loadProcess();
     </script>
 </body>
 </html>
-
