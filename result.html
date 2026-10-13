@@ -2,35 +2,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SETU | Your Government Process</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fffdf8">
+  <title>Setu | Your Government Process</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .result-main {
+      width: min(900px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 52px 0 72px;
+    }
+
+    .result-intro {
+      padding: 32px;
+      border: 1px solid #f0e2d5;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fffaf4, #fff);
+      box-shadow: 0 12px 32px rgba(24, 55, 91, .06);
+    }
+
+    .result-label {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #eaf7e9;
+      color: #138808;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .result-intro h1 {
+      margin: 20px 0 12px;
+      color: #17263d;
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+
+    .result-intro p,
+    .result-card p {
+      color: #65778d;
+      line-height: 1.8;
+    }
+
+    .result-card {
+      margin-top: 22px;
+      padding: 25px 28px;
+      border: 1px solid #f0e2d5;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .result-card h2 {
+      margin-top: 0;
+      color: #18375b;
+      font-size: 20px;
+    }
+
+    .result-steps {
+      padding-left: 22px;
+      color: #65778d;
+      line-height: 1.9;
+    }
+
+    .result-note {
+      padding: 14px 16px;
+      border-left: 4px solid #ff6b35;
+      border-radius: 8px;
+      background: #fff7f0;
+      color: #52657b;
+      line-height: 1.7;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .result-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      background: #ff6b35;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .result-link.secondary {
+      border: 1px solid #eadfd4;
+      background: white;
+      color: #18375b;
+    }
+
+    .result-link:focus-visible {
+      outline: 3px solid rgba(255, 107, 53, .65);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .result-main {
+        padding-top: 28px;
+      }
+
+      .result-intro,
+      .result-card {
+        padding: 21px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header class="navbar">
-        <a href="index.html" class="logo">SETU<span>.</span></a>
-        <a href="index.html">← Back to Home</a>
-    </header>
+  <header class="navbar">
+    <a href="index.html" class="logo" aria-label="Setu home">SE<span>TU</span><b>.</b></a>
+    <a href="index.html">← Back to Home</a>
+  </header>
 
-    <main class="about-section">
-        <h1 id="serviceTitle">Your Government Process</h1>
-        <p id="serviceMessage"></p>
-        <p>Check your state government's official website for current
-        requirements, documents, fees and application procedures.</p>
-        <br>
-        <a href="index.html">← Search another service</a>
-    </main>
+  <main class="result-main">
+    <section class="result-intro" aria-labelledby="serviceTitle">
+      <span class="result-label">✦ YOUR SETU GUIDE</span>
+      <h1 id="serviceTitle">Your Government Process</h1>
+      <p id="serviceMessage" aria-live="polite"></p>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const service = params.get("service") || "Government Service";
+      <div class="result-actions">
+        <a class="result-link" href="#next-steps">View next steps ↓</a>
+        <a class="result-link secondary" href="index.html">Search another service</a>
+      </div>
+    </section>
 
-        document.getElementById("serviceTitle").textContent =
-            service + " Process";
+    <section class="result-card" id="next-steps">
+      <h2>Your next steps</h2>
+      <ol class="result-steps">
+        <li>Confirm the exact service and eligibility criteria.</li>
+        <li>Check the required documents on the relevant official government website.</li>
+        <li>Review the application method, fees and submission instructions.</li>
+        <li>Save the official application reference or acknowledgement, if provided.</li>
+      </ol>
+    </section>
 
-        document.getElementById("serviceMessage").textContent =
-            "You are exploring the process for: " + service + ".";
-    </script>
+    <section class="result-card">
+      <h2>Before you apply</h2>
+      <div class="result-note">
+        Requirements may vary by state and authority. This general guide is
+        not an official checklist. Verify current documents, eligibility,
+        fees and procedures with the relevant government department.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const service = (params.get("service") || "").trim().slice(0, 200);
+
+    document.getElementById("serviceTitle").textContent =
+      service ? service + " Process" : "Your Government Process";
+
+    document.getElementById("serviceMessage").textContent = service
+      ? "Your starting point for understanding the " + service + " process."
+      : "Choose a government service on the homepage to get started.";
+  </script>
 </body>
 </html>
