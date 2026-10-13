@@ -401,3 +401,44 @@ button, input { font: inherit; }
   .examples { gap: 7px 12px; }
   .examples button, .try-label { font-size: 12px; }
 }
+/* Frontend polish: accessibility and interactions */
+
+/* Keep the desktop navigation visible while scrolling */
+@media (min-width: 761px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Make keyboard focus easy to see */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(255, 107, 53, 0.7);
+  outline-offset: 3px;
+}
+
+/* Smooth card interactions */
+.step-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+  .step-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(24, 55, 91, 0.1);
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
