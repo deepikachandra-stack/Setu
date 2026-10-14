@@ -488,11 +488,11 @@
                 return;
             }
 
-            try {
-                const response = await fetch(
-                    "http://127.0.0.1:5000/process?service=" +
-                    encodeURIComponent(service)
-                );
+           try {
+    const response = await fetch(
+        "https://setu-backend-a3o9.onrender.com/process?service=" +
+        encodeURIComponent(service)
+    );
 
                 const data = await response.json();
 
