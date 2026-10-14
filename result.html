@@ -488,11 +488,14 @@
                 return;
             }
 
-           try {
+          try {
+    const query = new URLSearchParams();
+    query.append("service", service);
+
     const response = await fetch(
-    "https://setu-backend-a3o9.onrender.com/process?" +
-    query.toString()
-);
+        "https://setu-backend-a3o9.onrender.com/process?" +
+        query.toString()
+    );
 
                 const data = await response.json();
 
