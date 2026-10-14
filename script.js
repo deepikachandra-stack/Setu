@@ -28,11 +28,10 @@ serviceForm.addEventListener("submit", async (event) => {
 
   formMessage.textContent = "Finding your government service...";
 
-  try {
+ try {
     const response = await fetch(
-      `http://127.0.0.1:5000/process?service=${encodeURIComponent(service)}`
+      `https://setu-backend-a3o9.onrender.com/process?service=${encodeURIComponent(service)}`
     );
-
     const data = await response.json();
 
     if (!response.ok || data.error) {
