@@ -1,11 +1,362 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SETU | Your Government Process</title>
+    <title>SETU | Service Guide</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: #f5f7ff;
+            color: #172554;
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 7%;
+            background: rgba(255,255,255,.95);
+            border-bottom: 1px solid #e7eaff;
+        }
+
+        .logo {
+            color: #303b9f;
+            font-size: 30px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: #8175ff; }
+
+        .navbar > a:last-child {
+            color: #4548b8;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .setu-results {
+            width: min(1100px, 90%);
+            margin: 38px auto 60px;
+        }
+
+        .setu-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 36px;
+            border-radius: 24px;
+            color: white;
+            background: linear-gradient(125deg, #4548d9, #7775f7 65%, #a5a0ff);
+            box-shadow: 0 14px 35px #5556c526;
+        }
+
+        .setu-hero::after {
+            content: "✦";
+            position: absolute;
+            right: 35px;
+            top: 12px;
+            font-size: 120px;
+            opacity: .15;
+        }
+
+        .setu-eyebrow {
+            margin: 0 0 12px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .setu-hero h1 {
+            margin: 0 0 12px;
+            max-width: 750px;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1.2;
+            overflow-wrap: anywhere;
+        }
+
+        .setu-hero p:last-child {
+            margin-bottom: 0;
+            color: #eeedff;
+            line-height: 1.7;
+        }
+
+        .setu-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            margin-bottom: 18px;
+            border: 1px solid #ffffff55;
+            border-radius: 30px;
+            background: #ffffff1c;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .setu-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+            gap: 22px;
+            margin-top: 24px;
+            align-items: start;
+        }
+
+        .setu-column {
+            display: grid;
+            gap: 22px;
+            min-width: 0;
+        }
+
+        .setu-card {
+            padding: 26px;
+            border: 1px solid #e8eaff;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 8px 25px #343c7810;
+        }
+
+        .setu-card h2 {
+            margin: 0 0 8px;
+            font-size: 21px;
+            color: #242d74;
+        }
+
+        .setu-description {
+            margin: 0 0 22px;
+            color: #69718d;
+            line-height: 1.7;
+        }
+
+        .setu-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            padding: 0 7px;
+            margin-left: 5px;
+            border-radius: 9px;
+            background: #eeefff;
+            color: #5553d7;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        #documentsList {
+            display: grid;
+            gap: 12px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #documentsList li {
+            margin: 0;
+            padding: 0;
+        }
+
+        #documentsList label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px;
+            border: 1px solid #e7e9f7;
+            border-radius: 13px;
+            background: #fbfbff;
+            cursor: pointer;
+            line-height: 1.5;
+            transition: border-color .2s, background .2s, transform .2s;
+        }
+
+        #documentsList label:hover {
+            border-color: #aaa8ff;
+            background: #f5f4ff;
+            transform: translateY(-1px);
+        }
+
+        .document-checkbox {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            margin: 2px 0 0;
+            accent-color: #5956e9;
+            cursor: pointer;
+        }
+
+        #documentsList label:has(input:checked) {
+            border-color: #8b87f8;
+            background: #f0efff;
+        }
+
+        .setu-primary {
+            width: 100%;
+            padding: 15px 18px;
+            margin-top: 20px;
+            border: 0;
+            border-radius: 12px;
+            color: white;
+            background: linear-gradient(100deg, #514ee4, #7773f4);
+            box-shadow: 0 7px 16px #5753db2b;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .setu-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px #5753db40;
+        }
+
+        .setu-primary:disabled {
+            opacity: .65;
+            cursor: wait;
+            transform: none;
+        }
+
+        .setu-message {
+            display: none;
+            padding: 14px 16px;
+            margin-top: 16px;
+            border-radius: 12px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .setu-message.visible { display: block; }
+
+        .setu-message.success {
+            color: #087443;
+            border: 1px solid #b9efd2;
+            background: #ecfff4;
+        }
+
+        .setu-message.warning {
+            color: #92510b;
+            border: 1px solid #ffdfad;
+            background: #fff8eb;
+        }
+
+        .setu-message.error {
+            color: #a42b3b;
+            border: 1px solid #ffcbd1;
+            background: #fff1f2;
+        }
+
+        .setu-steps {
+            padding: 0;
+            margin: 20px 0 0;
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .setu-steps li {
+            position: relative;
+            padding: 0 0 24px 48px;
+            color: #47516f;
+            line-height: 1.7;
+            counter-increment: steps;
+            overflow-wrap: anywhere;
+        }
+
+        .setu-steps li::before {
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: grid;
+            place-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #514ee4;
+            background: #edecff;
+            font-weight: 800;
+        }
+
+        .setu-steps li:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 36px;
+            bottom: 4px;
+            width: 2px;
+            background: #e2e1ff;
+        }
+
+        .setu-next {
+            padding: 19px;
+            border: 1px solid #d8f3e6;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #effdf6, #f8fffc);
+        }
+
+        .setu-next h2 {
+            color: #13754a;
+        }
+
+        #nextAction {
+            margin: 10px 0 0;
+            color: #315c4c;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .setu-note {
+            padding: 17px;
+            border-radius: 14px;
+            color: #69718d;
+            background: #eeefff;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .setu-note strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #4548b8;
+        }
+
+        .setu-footer {
+            padding: 25px 10px;
+            text-align: center;
+        }
+
+        .setu-footer a {
+            color: #514ee4;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .setu-footer a:hover { text-decoration: underline; }
+
+        #errorMessage:empty { display: none; }
+
+        @media (max-width: 760px) {
+            .navbar { padding: 17px 5%; }
+            .logo { font-size: 26px; }
+            .setu-results { width: 92%; margin-top: 22px; }
+            .setu-hero { padding: 27px 23px; border-radius: 19px; }
+            .setu-hero::after { right: 10px; font-size: 80px; }
+            .setu-grid { grid-template-columns: 1fr; }
+            .setu-card { padding: 21px; }
+            .navbar > a:last-child { font-size: 13px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="navbar">
@@ -13,36 +364,79 @@
         <a href="index.html">← Back to Home</a>
     </header>
 
-    <main class="about-section">
-        <h1 id="serviceTitle">Loading your government process...</h1>
-        <p id="serviceMessage" role="status">Please wait...</p>
-
-        <section id="processDetails" hidden>
-            <h2>Required Documents</h2>
-            <p>Select the documents you already have:</p>
-            <ul id="documentsList"></ul>
-
-            <button id="checkDocumentsButton" type="button">
-                Check Missing Documents
-            </button>
-            <p id="documentCheckMessage" role="status"></p>
-
-            <h2>Application Steps</h2>
-            <ol id="stepsList"></ol>
-
-            <h2>Next Action</h2>
-            <p id="nextAction"></p>
+    <main class="setu-results">
+        <section class="setu-hero">
+            <div class="setu-status">✦ &nbsp; YOUR SERVICE GUIDE</div>
+            <p class="setu-eyebrow">Your next step starts here</p>
+            <h1 id="serviceTitle">Loading your government process...</h1>
+            <p id="serviceMessage" role="status" aria-live="polite">
+                Please wait while we prepare your guide.
+            </p>
         </section>
 
-        <p id="errorMessage" role="alert"></p>
+        <p id="errorMessage" class="setu-message error" role="alert"></p>
 
-        <p>
-            Check your state government's official website for current
-            requirements, documents, fees and application procedures.
-        </p>
+        <section id="processDetails" hidden>
+            <div class="setu-grid">
+                <div class="setu-column">
+                    <section class="setu-card">
+                        <h2>📋 Required Documents</h2>
+                        <p class="setu-description">
+                            Tick the documents you already have. We’ll help you
+                            identify what’s still missing.
+                        </p>
 
-        <br>
-        <a href="index.html">← Search another service</a>
+                        <ul id="documentsList"></ul>
+
+                        <button id="checkDocumentsButton"
+                                class="setu-primary"
+                                type="button">
+                            Check My Documents →
+                        </button>
+
+                        <p id="documentCheckMessage"
+                           class="setu-message"
+                           role="status"
+                           aria-live="polite"></p>
+                    </section>
+
+                    <section class="setu-card">
+                        <h2>🪜 Application Process</h2>
+                        <p class="setu-description">
+                            Follow these steps to understand what to do next.
+                        </p>
+                        <ol id="stepsList" class="setu-steps"></ol>
+                    </section>
+                </div>
+
+                <aside class="setu-column">
+                    <section class="setu-card setu-next">
+                        <h2>✨ Your Next Action</h2>
+                        <p id="nextAction">Preparing your next step...</p>
+                    </section>
+
+                    <section class="setu-card">
+                        <h2>💡 Before You Apply</h2>
+                        <p class="setu-description" style="margin: 12px 0 0;">
+                            Keep clear copies of your documents ready and check
+                            the latest instructions on your state government’s
+                            official website.
+                        </p>
+                    </section>
+
+                    <div class="setu-note">
+                        <strong>🛡️ A helpful reminder</strong>
+                        Requirements, fees and processing times can change.
+                        Confirm the latest details with the relevant official
+                        government department before applying.
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <footer class="setu-footer">
+            <a href="index.html">← Search another service</a>
+        </footer>
     </main>
 
     <script>
@@ -57,13 +451,23 @@
         const nextAction = document.getElementById("nextAction");
         const errorMessage = document.getElementById("errorMessage");
         const checkButton = document.getElementById("checkDocumentsButton");
-        const documentCheckMessage = document.getElementById("documentCheckMessage");
+        const checkMessage = document.getElementById("documentCheckMessage");
+
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.className = "setu-message visible " + type;
+        }
 
         async function loadProcess() {
             if (!service) {
                 serviceTitle.textContent = "No service selected";
                 serviceMessage.textContent =
                     "Please return home and select a service.";
+                showMessage(
+                    errorMessage,
+                    "No service was selected. Return home to get started.",
+                    "error"
+                );
                 return;
             }
 
@@ -76,26 +480,29 @@
                 const data = await response.json();
 
                 if (!response.ok || data.error) {
-                    throw new Error(
-                        data.error || "Unable to load this service."
-                    );
+                    throw new Error(data.error || "Unable to load this service.");
                 }
 
                 serviceTitle.textContent = data.name + " Process";
                 serviceMessage.textContent =
-                    "Here is the process for " + data.name + ".";
+                    "Your guide to " + data.name +
+                    " — review the documents and follow the steps below.";
+
+                documentsList.replaceChildren();
+                stepsList.replaceChildren();
 
                 data.documents.forEach((documentName) => {
                     const item = document.createElement("li");
+                    const label = document.createElement("label");
                     const checkbox = document.createElement("input");
+
                     checkbox.type = "checkbox";
                     checkbox.value = documentName;
                     checkbox.className = "document-checkbox";
 
-                    const label = document.createElement("label");
                     label.appendChild(checkbox);
                     label.appendChild(
-                        document.createTextNode(" " + documentName)
+                        document.createTextNode(documentName)
                     );
 
                     item.appendChild(label);
@@ -111,10 +518,15 @@
                 nextAction.textContent = data.next_action;
                 processDetails.hidden = false;
             } catch (error) {
-                serviceTitle.textContent = "Unable to load process";
+                serviceTitle.textContent = "Let's reconnect";
                 serviceMessage.textContent =
-                    "Please check your connection to the Setu backend.";
-                errorMessage.textContent = error.message;
+                    "We couldn't load your service guide right now.";
+
+                showMessage(
+                    errorMessage,
+                    "Unable to load the process. Make sure the Setu backend is running, then refresh this page.",
+                    "error"
+                );
                 console.error("Process loading error:", error);
             }
         }
@@ -124,9 +536,10 @@
                 document.querySelectorAll(".document-checkbox:checked")
             ).map((checkbox) => checkbox.value);
 
-            documentCheckMessage.textContent =
-                "Checking your documents...";
             checkButton.disabled = true;
+            checkButton.textContent = "Checking your documents...";
+
+            showMessage(checkMessage, "Checking your documents...", "warning");
 
             try {
                 const query = new URLSearchParams();
@@ -144,25 +557,32 @@
                 const data = await response.json();
 
                 if (!response.ok || data.error) {
-                    throw new Error(
-                        data.error || "Unable to check documents."
-                    );
+                    throw new Error(data.error || "Unable to check documents.");
                 }
 
                 if (data.missing_documents.length === 0) {
-                    documentCheckMessage.textContent =
-                        "You have all the required documents!";
+                    showMessage(
+                        checkMessage,
+                        "✓ Amazing! You have all the required documents.",
+                        "success"
+                    );
                 } else {
-                    documentCheckMessage.textContent =
-                        "Missing documents: " +
-                        data.missing_documents.join(", ");
+                    showMessage(
+                        checkMessage,
+                        "Still needed: " + data.missing_documents.join(", "),
+                        "warning"
+                    );
                 }
             } catch (error) {
-                documentCheckMessage.textContent =
-                    "Unable to check documents. Please make sure the backend is running.";
+                showMessage(
+                    checkMessage,
+                    "Unable to check documents. Please make sure the backend is running.",
+                    "error"
+                );
                 console.error("Document check error:", error);
             } finally {
                 checkButton.disabled = false;
+                checkButton.textContent = "Check My Documents →";
             }
         });
 
